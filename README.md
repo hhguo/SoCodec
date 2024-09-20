@@ -6,7 +6,7 @@ This repository contains inference scripts for SoCodec, an ultra-low-bitrate spe
 
 ![](https://static.arxiv.org/static/browse/0.3.4/images/icons/favicon-16x16.png) [Paper](https://arxiv.org/abs/2409.00933) <br>
 📈 [Demo Site](https://hhguo.github.io/DemoSoCodec)<br>
-⚙ [Model Weights](https://github.com/descriptinc/descript-audio-codec/releases/download/0.0.1/weights.pth)
+⚙ [Model Weights](https://huggingface.co/hhguo/SoCodec)
 
 👉 With SoCodec, you can compress **audio** into discrete codes at an **ultra low 0.47 kbps bitrate** and a **short 120ms frameshift**.  <br>
 👌 It can be used as a drop-in replacement for EnCodec or other multi-stream codecs for speech language modeling applications. <br>
