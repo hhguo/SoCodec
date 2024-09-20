@@ -60,6 +60,7 @@ We also provide the [pretrained vocoders](https://huggingface.co/hhguo/SoCodec) 
 
 ## TODO
 
+- [ ] Provide the checkpoint and inference code of multi-stream LLM
 - [ ] Provide the single-codebook version
 - [ ] Provide a higher-quality neural vocoder
 - [ ] Provide a multi-lingual version (Chinese, English, etc.)
