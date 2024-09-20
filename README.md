@@ -17,7 +17,7 @@ This repository contains inference scripts for SoCodec, an ultra-low-bitrate spe
 ## News
 - **Sep 2024 (v1.0):**
   - We have released the checkpoint and inference code of SoCodec
-  - We have released the test set for Socodec, available [**here**](https://hhguo.github.io/DemoSoCodec)
+  <!-- - We have released the test set for Socodec, available [**here**](https://hhguo.github.io/DemoSoCodec) -->
 
 ## Installation
 
