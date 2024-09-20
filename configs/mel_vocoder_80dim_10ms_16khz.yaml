@@ -1,0 +1,23 @@
+id: mel_bigvgan_16k_wenetspeech_denoise_v2
+
+#################################################
+# Task configuration
+#################################################
+
+task:
+    _name: Vocoder
+    network:
+        vocoder:
+            _name: BigVGANGenerator
+            gen_cfg:
+                num_mels: 80
+                resblock: 0
+                upsample_rates: [5, 4, 2, 2, 2]
+                upsample_kernel_sizes: [11, 8, 4, 4, 4]
+                upsample_initial_channel: 512
+                resblock_kernel_sizes: [3, 7, 11]
+                resblock_dilation_sizes: [[1,3,5], [1,3,5], [1,3,5]]
+                activation: snakebeta
+                snake_logscale: true
+                use_bias_at_final: true
+                use_tanh_at_final: true

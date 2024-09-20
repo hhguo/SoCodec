@@ -1,0 +1,43 @@
+id: staged_vqvae_120ms_1_4_16384_opq_v2
+
+#################################################
+# Task configuration
+#################################################
+
+task:
+    _name: SpeechTokenizer
+    network:
+        analyzer:
+            _name: StagedVQVAE
+            in_dim: 1024
+            out_dim: 80
+            n_model_size: 1024
+            downsample_scales: [2, 3]
+            upsample_scales:
+                - [3, 2]
+                - [2]
+            mel_config:
+                style: BigVGAN
+                filter_length: 1024
+                hop_length: 160
+                win_length: 640
+                n_mel_channels: 80
+                sampling_rate: 16000
+            vq_class: VectorQuantization
+            vq_config:
+                codebook_size: [128, 128]
+                codebook_dim: [128, 128]
+                requires_projection: True
+                decay: 0.99
+                threshold_ema_dead_code: 0
+                threshold_kmeans_dead_code: 99999999
+                commitment_weight: 1.0
+            tree_config:
+                -
+                    downsample_rate: 1
+                    n_groups: 4
+                    dropout: 0
+                    ordered: true
+            n_samples_per_token: 1920
+        discriminator:
+            _name: VQGANDiscriminatorMega
