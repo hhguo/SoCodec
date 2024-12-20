@@ -458,7 +458,7 @@ class StagedVQVAE(nn.Module):
         
         return output_dict
 
-    @torch.no_grad
+    @torch.no_grad()
     def extract_speech_tokens(self, wav, wav_length, serialize=True, extract_spk=True, shuffle=False):
         output_dict = self.forward(wav, wav_length, True, False, extract_spk=extract_spk, shuffle=shuffle)
         token_seqs, token_length = output_dict['token'], output_dict['token_length']
@@ -477,9 +477,12 @@ class StagedVQVAE(nn.Module):
             scale = self.tree_config[i]['downsample_rate']
             new_token_len = token_length // scale
             pad = int(new_token_len.max()) - token_seq.shape[1]
+            token_seq = token_seq.float()
+            # WAR: fix "RuntimeError: "replication_pad2d_cuda" not implemented for 'Long'"
             token_seq = F.pad(token_seq,
                               (0, pad) if len(token_seq.shape) == 2 else (0, 0, 0, pad),
                               'replicate')
+            token_seq = token_seq.long()
 
             if residual is not None:
                 token_seq = (token_seq, residual)
@@ -499,7 +502,7 @@ class StagedVQVAE(nn.Module):
 
         return output_dict
 
-    @torch.no_grad
+    @torch.no_grad()
     def reconstruct_mel(self, token, spk):
         quant, _ = self.quantizer.decode(token, None)
         speaker_embedding_1 = speaker_embedding_2 = spk
@@ -511,7 +514,7 @@ class StagedVQVAE(nn.Module):
         }
         return output_dict
 
-    @torch.no_grad
+    @torch.no_grad()
     def code_to_latent(self, token, mel=None):
         quant, _ = self.quantizer.decode(token, None)
         speaker_embedding = self.speaker_encoder(mel)  
